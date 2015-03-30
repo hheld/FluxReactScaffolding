@@ -20,7 +20,8 @@ outputPath = os.path.join(appPath, appName.replace(' ', '_'))
 def files(members):
     for tarinfo in members:
         tarinfo.name = tarinfo.name.replace('FluxReactProjectTemplate/', '')
-        yield tarinfo
+        if tarinfo.name != 'FluxReactProjectTemplate':
+            yield tarinfo
 
 tar = tarfile.open(template, 'r')
 tar.extractall(path=outputPath, members=files(tar))
